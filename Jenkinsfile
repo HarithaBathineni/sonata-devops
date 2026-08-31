@@ -4,7 +4,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE = "my-app:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = "harithabathineni/sonata:${env.BUILD_NUMBER}"
     }
     
     stages {
@@ -16,14 +16,14 @@ pipeline {
             }
         }
         
-        /*stage('Push Docker Image') {
+        stage('Push Docker Image') {
             steps {
                 // Securely injects credentials to log in and push via shell
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials-id', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     sh "echo ${PASS} | docker login -u ${USER} --password-stdin"
                     sh "docker push ${DOCKER_IMAGE}"
                 }
             }
-        }*/
+        }
     }
 }
