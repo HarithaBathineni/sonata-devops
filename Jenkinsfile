@@ -8,20 +8,15 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        
         stage('Build Docker Image') {
             steps {
                 // Standard shell command to build the image from the root Dockerfile
                 sh "docker build -t ${DOCKER_IMAGE} ."
+                sh "docker images"
             }
         }
         
-        stage('Push Docker Image') {
+        /*stage('Push Docker Image') {
             steps {
                 // Securely injects credentials to log in and push via shell
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials-id', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
@@ -29,6 +24,6 @@ pipeline {
                     sh "docker push ${DOCKER_IMAGE}"
                 }
             }
-        }
+        }*/
     }
 }
