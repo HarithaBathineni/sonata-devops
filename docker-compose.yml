@@ -15,7 +15,9 @@ services:
    privileged: true
 
  jenkins:
-   build: .
+   build:
+    context: .
+    dockerfile: Dockerfile_Jenkins
    ports:
      - "8081:8080"
      - "50000:50000"
